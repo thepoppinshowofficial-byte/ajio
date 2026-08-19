@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajio Best Deal</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #222; padding: 20px; box-sizing: border-box; }
+  h1 { font-size: 20px; margin-bottom: 28px; }
+  #order-now-btn {
+    display: inline-block; padding: 18px 48px; background: #e63946; color: #fff;
+    font-weight: 700; font-size: 18px; border-radius: 6px; text-decoration: none;
+  }
+  .disclosure { font-size: 11px; color: #999; margin-top: 20px; position: absolute; bottom: 16px; }
+</style>
+</head>
+<body>
+
+  <h1>😱 This Ajio Deal Is Too Good</h1>
+  <a id="order-now-btn" href="#">Reveal My Deal</a>
+
+  <p class="disclosure">This page contains an affiliate link. We may earn a commission if you make a purchase.</p>
+
+<script>
+(function () {
+  var BASE_URL   = "https://tracking.ajio.business/click?pid=156&offer_id=2&sub1=M3_{siteid}";
+  var PID        = "156";
+  var OFFER_ID   = "2";
+  var SUB_PREFIX = "M3_";
+  var DEFAULT_SITE_ID = "direct";
+  var CANDIDATE_PARAMS = ["siteid", "site_id", "subid", "sub_id", "zoneid", "zone_id", "site", "clickid"];
+
+  function getIncomingValue() {
+    var params = new URLSearchParams(window.location.search);
+    for (var i = 0; i < CANDIDATE_PARAMS.length; i++) {
+      var v = params.get(CANDIDATE_PARAMS[i]);
+      if (v) return v.replace(/[^a-zA-Z0-9_-]/g, "");
+    }
+    return DEFAULT_SITE_ID;
+  }
+
+  var sub1 = SUB_PREFIX + getIncomingValue();
+  var url = BASE_URL
+    + "?pid=" + encodeURIComponent(PID)
+    + "&offer_id=" + encodeURIComponent(OFFER_ID)
+    + "&sub1=" + encodeURIComponent(sub1);
+
+  var btn = document.getElementById("order-now-btn");
+  btn.href = url;
+  btn.target = "_blank";
+  btn.rel = "noopener nofollow";
+})();
+</script>
+
+</body>
+</html>
