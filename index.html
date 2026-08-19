@@ -1,94 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajio Best Deals & Coupons</title>
-<style>
-  body {
-    font-family: -apple-system, Arial, sans-serif; margin: 0; min-height: 100vh;
-    display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
-    background-image: url('assets/ajio.png'); background-size: cover; background-position: center; background-repeat: no-repeat;
-  }
-  .card {
-    max-width: 480px; width: 100%; text-align: center; color: #222;
-    background: rgba(255,255,255,0.92); border-radius: 12px; padding: 32px 24px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  }
-  h1 { font-size: 22px; margin-top: 0; }
-  p { font-size: 15px; line-height: 1.5; color: #444; }
-  .countdown { font-size: 40px; font-weight: 700; margin: 24px 0 8px; color: #e63946; }
-  .label { font-size: 14px; color: #888; margin-bottom: 24px; }
-  #order-now-btn {
-    display: inline-block; padding: 16px 40px; background: #ccc; color: #fff;
-    font-weight: 700; font-size: 18px; border-radius: 6px; text-decoration: none;
-    pointer-events: none; transition: background .3s;
-  }
-  #order-now-btn.active {
-    background: #e63946; pointer-events: auto; animation: pulse 1s infinite;
-  }
-  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-  .disclosure { font-size: 11px; color: #999; margin-top: 32px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Redirecting...</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            text-align: center;
+        }
+
+        .redirect-box {
+            padding: 30px;
+        }
+
+        .countdown {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        p {
+            color: #555;
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>😱 This Ajio Deal Is Way Too Good — Here's Why</h1>
-    <p>We almost didn't believe the discount ourselves. Tap below to see the live deal before today's pricing changes.</p>
+    <div class="redirect-box">
+        <h2>Redirecting you...</h2>
+        <p>Please wait while we take you to AJIO.</p>
 
-    <div class="countdown" id="count">4</div>
-    <div class="label">Unlocking your deal…</div>
+        <div class="countdown" id="countdown">5</div>
 
-    <a id="order-now-btn" href="#">Reveal My Deal</a>
+        <p>You will be redirected automatically.</p>
+    </div>
 
-    <p class="disclosure">This page contains an affiliate link. We may earn a commission if you make a purchase.</p>
-  </div>
+    <script>
+        const affiliateURL = "https://tracking.ajio.business/click?pid=156&offer_id=2&sub1=M3_{siteid}";
+        let seconds = 5;
 
-<script>
-(function () {
-  var BASE_URL   = "https://tracking.ajio.business/click?pid=156&offer_id=2&sub1=M3_{siteid}";
-  var PID        = "156";
-  var OFFER_ID   = "2";
-  var SUB_PREFIX = "M3_";
-  var DEFAULT_SITE_ID = "direct";
-  var CANDIDATE_PARAMS = ["siteid", "site_id", "subid", "sub_id", "zoneid", "zone_id", "site", "clickid"];
+        const countdown = document.getElementById("countdown");
 
-  function getIncomingValue() {
-    var params = new URLSearchParams(window.location.search);
-    for (var i = 0; i < CANDIDATE_PARAMS.length; i++) {
-      var v = params.get(CANDIDATE_PARAMS[i]);
-      if (v) return v.replace(/[^a-zA-Z0-9_-]/g, "");
-    }
-    return DEFAULT_SITE_ID;
-  }
+        const timer = setInterval(function () {
+            seconds--;
+            countdown.textContent = seconds;
 
-  var sub1 = SUB_PREFIX + getIncomingValue();
-  var url = BASE_URL
-    + "?pid=" + encodeURIComponent(PID)
-    + "&offer_id=" + encodeURIComponent(OFFER_ID)
-    + "&sub1=" + encodeURIComponent(sub1);
-
-  var btn = document.getElementById("order-now-btn");
-  btn.href = url;
-  btn.target = "_blank";
-  btn.rel = "noopener nofollow";
-
-  // Visible countdown only — button becomes clickable at 0, navigation still requires a real user click.
-  var n = 4;
-  var countEl = document.getElementById("count");
-  var timer = setInterval(function () {
-    n -= 1;
-    if (n <= 0) {
-      clearInterval(timer);
-      countEl.textContent = "Ready!";
-      btn.classList.add("active");
-    } else {
-      countEl.textContent = n;
-    }
-  }, 1000);
-})();
-</script>
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = affiliateURL;
+            }
+        }, 1000);
+    </script>
 
 </body>
 </html>
