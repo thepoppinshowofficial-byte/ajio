@@ -3,23 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajio Best Deal</title>
+<title>Ajio Best Deals & Coupons</title>
 <style>
-  body { font-family: -apple-system, Arial, sans-serif; height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #222; padding: 20px; box-sizing: border-box; }
-  h1 { font-size: 20px; margin-bottom: 28px; }
-  #order-now-btn {
-    display: inline-block; padding: 18px 48px; background: #e63946; color: #fff;
-    font-weight: 700; font-size: 18px; border-radius: 6px; text-decoration: none;
+  body {
+    font-family: -apple-system, Arial, sans-serif; margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
+    background-image: url('ajio.png'); background-size: cover; background-position: center; background-repeat: no-repeat;
   }
-  .disclosure { font-size: 11px; color: #999; margin-top: 20px; position: absolute; bottom: 16px; }
+  .card {
+    max-width: 480px; width: 100%; text-align: center; color: #222;
+    background: rgba(255,255,255,0.92); border-radius: 12px; padding: 32px 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+  h1 { font-size: 22px; margin-top: 0; }
+  p { font-size: 15px; line-height: 1.5; color: #444; }
+  .countdown { font-size: 40px; font-weight: 700; margin: 24px 0 8px; color: #e63946; }
+  .label { font-size: 14px; color: #888; margin-bottom: 24px; }
+  #order-now-btn {
+    display: inline-block; padding: 16px 40px; background: #ccc; color: #fff;
+    font-weight: 700; font-size: 18px; border-radius: 6px; text-decoration: none;
+    pointer-events: none; transition: background .3s;
+  }
+  #order-now-btn.active {
+    background: #e63946; pointer-events: auto; animation: pulse 1s infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .disclosure { font-size: 11px; color: #999; margin-top: 32px; }
 </style>
 </head>
 <body>
 
-  <h1>😱 This Ajio Deal Is Too Good</h1>
-  <a id="order-now-btn" href="#">Reveal My Deal</a>
+  <div class="card">
+    <h1>😱 This Ajio Deal Is Way Too Good — Here's Why</h1>
+    <p>We almost didn't believe the discount ourselves. Tap below to see the live deal before today's pricing changes.</p>
 
-  <p class="disclosure">This page contains an affiliate link. We may earn a commission if you make a purchase.</p>
+    <div class="countdown" id="count">4</div>
+    <div class="label">Unlocking your deal…</div>
+
+    <a id="order-now-btn" href="#">Reveal My Deal</a>
+
+    <p class="disclosure">This page contains an affiliate link. We may earn a commission if you make a purchase.</p>
+  </div>
 
 <script>
 (function () {
@@ -49,6 +73,20 @@
   btn.href = url;
   btn.target = "_blank";
   btn.rel = "noopener nofollow";
+
+  // Visible countdown only — button becomes clickable at 0, navigation still requires a real user click.
+  var n = 4;
+  var countEl = document.getElementById("count");
+  var timer = setInterval(function () {
+    n -= 1;
+    if (n <= 0) {
+      clearInterval(timer);
+      countEl.textContent = "Ready!";
+      btn.classList.add("active");
+    } else {
+      countEl.textContent = n;
+    }
+  }, 1000);
 })();
 </script>
 
