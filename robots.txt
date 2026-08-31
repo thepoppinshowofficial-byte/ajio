@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fashionnewz.netlify.app/sitemap.xml
